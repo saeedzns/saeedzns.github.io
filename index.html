@@ -619,9 +619,28 @@
         <div class="container mx-auto px-6 py-4 flex items-center justify-between gap-4">
             <a href="#home" class="font-display font-black text-xl text-brand-primary">Saeed<span class="text-brand-accent">.</span></a>
             <div class="flex items-center gap-4">
-                <div class="language-switcher print:hidden flex gap-2 items-center">
-                    <button class="lang-btn lang-en px-2 py-1 text-lg rounded-md bg-brand-accent text-white transition-all" data-lang="en" aria-label="English">&#x1F1EC;&#x1F1E7;</button>
-                    <button class="lang-btn lang-it px-2 py-1 text-lg rounded-md bg-slate-200 text-slate-700 hover:bg-slate-300 transition-all" data-lang="it" aria-label="Italiano">&#x1F1EE;&#x1F1F9;</button>
+                <div class="language-switcher print:hidden flex gap-3 items-center">
+                    <button class="lang-btn lang-en transition-all hover:scale-110" data-lang="en" aria-label="English" title="English">
+                        <svg viewBox="0 0 60 30" width="32" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <clipPath id="uk-flag-clip">
+                                <rect width="60" height="30"/>
+                            </clipPath>
+                            <g clip-path="url(#uk-flag-clip)">
+                                <rect width="60" height="30" fill="#012169"/>
+                                <path d="M0 0L60 30M60 0L0 30" stroke="#FFFFFF" stroke-width="6"/>
+                                <path d="M0 0L60 30M60 0L0 30" stroke="#C8102E" stroke-width="3"/>
+                                <path d="M30 0V30M0 15H60" stroke="#FFFFFF" stroke-width="10"/>
+                                <path d="M30 0V30M0 15H60" stroke="#C8102E" stroke-width="6"/>
+                            </g>
+                        </svg>
+                    </button>
+                    <button class="lang-btn lang-it transition-all hover:scale-110" data-lang="it" aria-label="Italiano" title="Italiano">
+                        <svg viewBox="0 0 60 40" width="32" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <rect x="0" y="0" width="20" height="40" fill="#009246"/>
+                            <rect x="20" y="0" width="20" height="40" fill="#FFFFFF"/>
+                            <rect x="40" y="0" width="20" height="40" fill="#CE2B37"/>
+                        </svg>
+                    </button>
                 </div>
                 <a href="mailto:zns1992@gmail.com" class="hidden sm:inline-flex items-center gap-2 bg-brand-primary text-white px-5 py-3 rounded-2xl hover:bg-brand-accent transition-all">
                     <i class="fas fa-envelope text-sm"></i> <span data-i18n="nav-contact">Contact</span>
