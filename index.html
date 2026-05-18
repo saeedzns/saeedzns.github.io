@@ -590,6 +590,10 @@
             <i class="fas fa-moon"></i>
             <span>Dark mode</span>
         </button>
+        <div class="language-switcher print:hidden flex gap-2 items-center">
+            <button class="lang-btn lang-en px-3 py-1 text-sm font-semibold rounded-md bg-brand-accent text-white transition-all" data-lang="en" aria-label="English">EN</button>
+            <button class="lang-btn lang-it px-3 py-1 text-sm font-semibold rounded-md bg-slate-200 text-slate-700 hover:bg-slate-300 transition-all" data-lang="it" aria-label="Italiano">IT</button>
+        </div>
         <button class="mobile-menu-toggle lg:hidden print:hidden p-2 rounded-md bg-white/80 border border-slate-200 shadow-sm" aria-label="Open menu">
             <i class="fas fa-bars text-sm"></i>
         </button>
@@ -600,15 +604,15 @@
             <div class="portfolio-focus-badge">
                 <i class="fas fa-brain"></i>
             </div>
-            <div class="portfolio-focus-label">Portfolio Focus</div>
-            <h2 class="portfolio-focus-title">Applied AI for real-world systems</h2>
+            <div class="portfolio-focus-label" data-i18n="portfolio-focus">Portfolio Focus</div>
+            <h2 class="portfolio-focus-title" data-i18n="portfolio-motto">Applied AI for real-world systems</h2>
             <div class="portfolio-focus-list">
-                <div class="portfolio-focus-item"><i class="fas fa-check"></i><span>Computer vision and egocentric interaction understanding</span></div>
-                <div class="portfolio-focus-item"><i class="fas fa-check"></i><span>Bayesian modeling and statistical analysis</span></div>
-                <div class="portfolio-focus-item"><i class="fas fa-check"></i><span>Data engineering, SQL, and reproducible pipelines</span></div>
-                <div class="portfolio-focus-item"><i class="fas fa-check"></i><span>BI dashboards, reporting automation, and Power BI</span></div>
+                <div class="portfolio-focus-item"><i class="fas fa-check"></i><span data-i18n="portfolio-focus-1">Computer vision and egocentric interaction understanding</span></div>
+                <div class="portfolio-focus-item"><i class="fas fa-check"></i><span data-i18n="portfolio-focus-2">Bayesian modeling and statistical analysis</span></div>
+                <div class="portfolio-focus-item"><i class="fas fa-check"></i><span data-i18n="portfolio-focus-3">Data engineering, SQL, and reproducible pipelines</span></div>
+                <div class="portfolio-focus-item"><i class="fas fa-check"></i><span data-i18n="portfolio-focus-4">BI dashboards, reporting automation, and Power BI</span></div>
             </div>
-            <div class="portfolio-focus-note">
+            <div class="portfolio-focus-note" data-i18n="portfolio-note">
                 Data Science graduate from Sapienza University with practical experience in analytics, machine learning, and reporting automation.
             </div>
         </div>
@@ -619,7 +623,7 @@
         <div class="container mx-auto px-6 py-4 flex items-center justify-between">
             <a href="#home" class="font-display font-black text-xl text-brand-primary">Saeed<span class="text-brand-accent">.</span></a>
             <a href="mailto:zns1992@gmail.com" class="hidden sm:inline-flex items-center gap-2 bg-brand-primary text-white px-5 py-3 rounded-2xl hover:bg-brand-accent transition-all">
-                <i class="fas fa-envelope text-sm"></i> Contact
+                <i class="fas fa-envelope text-sm"></i> <span data-i18n="nav-contact">Contact</span>
             </a>
         </div>
     </nav>
@@ -635,16 +639,16 @@
                     <div class="hero-link" data-preview="projects">
                         <a class="hero-link-main" href="#projects">
                             <div class="hero-link-title">
-                                <span><i class="fas fa-diagram-project text-brand-accent"></i> Projects</span>
+                                <span><i class="fas fa-diagram-project text-brand-accent"></i> <span data-i18n="menu-projects">Projects</span></span>
                                 <i class="fas fa-chevron-right text-xs text-slate-400"></i>
                             </div>
                         </a>
                         <div class="hero-link-sub">
-                            <a href="#projects" data-preview="projects-litesta">Ego4D-LiteSTA
-                                <span class="short-excerpt">Egocentric interaction anticipation.</span>
+                            <a href="#projects" data-preview="projects-litesta" data-i18n="projects-ego4d">Ego4D-LiteSTA
+                                <span class="short-excerpt" data-i18n="projects-ego4d-excerpt">Egocentric interaction anticipation.</span>
                             </a>
-                            <a href="#projects" data-preview="projects-bayesian">Bayesian Regression
-                                <span class="short-excerpt">Ordinal regression for obesity prediction.</span>
+                            <a href="#projects" data-preview="projects-bayesian" data-i18n="projects-bayesian">Bayesian Regression
+                                <span class="short-excerpt" data-i18n="projects-bayesian-excerpt">Ordinal regression for obesity prediction.</span>
                             </a>
                         </div>
                     </div>
@@ -652,16 +656,16 @@
                     <div class="hero-link" data-preview="skills">
                         <a class="hero-link-main" href="#skills">
                             <div class="hero-link-title">
-                                <span><i class="fas fa-layer-group text-brand-accent"></i> Skills</span>
+                                <span><i class="fas fa-layer-group text-brand-accent"></i> <span data-i18n="menu-skills">Skills</span></span>
                                 <i class="fas fa-chevron-right text-xs text-slate-400"></i>
                             </div>
                         </a>
                         <div class="hero-link-sub">
-                            <a href="#skills" data-preview="skills-ml">Data Science & ML
-                                <span class="short-excerpt">Models, pipelines, and evaluation.</span>
+                            <a href="#skills" data-preview="skills-ml" data-i18n="skills-ml">Data Science & ML
+                                <span class="short-excerpt" data-i18n="skills-ml-excerpt">Models, pipelines, and evaluation.</span>
                             </a>
-                            <a href="#skills" data-preview="skills-bi">BI & Automation
-                                <span class="short-excerpt">Power BI, dashboards, reporting.</span>
+                            <a href="#skills" data-preview="skills-bi" data-i18n="skills-bi">BI & Automation
+                                <span class="short-excerpt" data-i18n="skills-bi-excerpt">Power BI, dashboards, reporting.</span>
                             </a>
                         </div>
                     </div>
@@ -669,16 +673,16 @@
                     <div class="hero-link" data-preview="experience">
                         <a class="hero-link-main" href="#experience">
                             <div class="hero-link-title">
-                                <span><i class="fas fa-briefcase text-brand-accent"></i> Experience</span>
+                                <span><i class="fas fa-briefcase text-brand-accent"></i> <span data-i18n="menu-experience">Experience</span></span>
                                 <i class="fas fa-chevron-right text-xs text-slate-400"></i>
                             </div>
                         </a>
                         <div class="hero-link-sub">
-                            <a href="#experience" data-preview="experience-allianz">Allianz Trade
-                                <span class="short-excerpt">Data analyst — enterprise reporting.</span>
+                            <a href="#experience" data-preview="experience-allianz" data-i18n="exp-allianz">Allianz Trade
+                                <span class="short-excerpt" data-i18n="exp-allianz-excerpt">Data analyst — enterprise reporting.</span>
                             </a>
-                            <a href="#experience" data-preview="experience-rasoul">Rasoul
-                                <span class="short-excerpt">Retail trade data analysis.</span>
+                            <a href="#experience" data-preview="experience-rasoul" data-i18n="exp-rasoul">Rasoul
+                                <span class="short-excerpt" data-i18n="exp-rasoul-excerpt">Retail trade data analysis.</span>
                             </a>
                         </div>
                     </div>
@@ -686,16 +690,16 @@
                     <div class="hero-link" data-preview="education">
                         <a class="hero-link-main" href="#education">
                             <div class="hero-link-title">
-                                <span><i class="fas fa-graduation-cap text-brand-accent"></i> Education</span>
+                                <span><i class="fas fa-graduation-cap text-brand-accent"></i> <span data-i18n="menu-education">Education</span></span>
                                 <i class="fas fa-chevron-right text-xs text-slate-400"></i>
                             </div>
                         </a>
                         <div class="hero-link-sub">
-                            <a href="#education" data-preview="education-sapienza">Sapienza University
-                                <span class="short-excerpt">MSc in Data Science.</span>
+                            <a href="#education" data-preview="education-sapienza" data-i18n="edu-sapienza">Sapienza University
+                                <span class="short-excerpt" data-i18n="edu-sapienza-excerpt">MSc in Data Science.</span>
                             </a>
-                            <a href="#education" data-preview="education-thesis">MSc Data Science
-                                <span class="short-excerpt">Thesis: Ego4D-LiteSTA.</span>
+                            <a href="#education" data-preview="education-thesis" data-i18n="edu-thesis">MSc Data Science
+                                <span class="short-excerpt" data-i18n="edu-thesis-excerpt">Thesis: Ego4D-LiteSTA.</span>
                             </a>
                         </div>
                     </div>
@@ -706,42 +710,42 @@
                         <!-- Role badges -->
                         <div class="inline-flex flex-wrap items-center justify-center lg:justify-start gap-2 mb-5 rounded-full bg-white/80 border border-slate-200 shadow-sm px-3 py-2 backdrop-blur">
                             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-[0.18em] bg-brand-accent/10 text-brand-accent">
-                                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span> Data Science
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span> <span data-i18n="hero-data-science">Data Science</span>
                             </span>
                             <span class="hidden sm:block w-px h-5 bg-slate-200"></span>
                             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-[0.18em] text-slate-700">
-                                <i class="fas fa-brain text-brand-accent text-xs"></i> Machine Learning
+                                <i class="fas fa-brain text-brand-accent text-xs"></i> <span data-i18n="hero-ml">Machine Learning</span>
                             </span>
                             <span class="hidden sm:block w-px h-5 bg-slate-200"></span>
                             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-[0.18em] text-slate-500">
-                                <i class="fas fa-eye text-brand-accent text-xs"></i> Computer Vision
+                                <i class="fas fa-eye text-brand-accent text-xs"></i> <span data-i18n="hero-cv">Computer Vision</span>
                             </span>
                         </div>
 
                         <!-- Main heading -->
-                        <h1 class="text-4xl lg:text-6xl font-display font-black text-brand-primary mb-5 leading-[0.95]">
+                        <h1 class="text-4xl lg:text-6xl font-display font-black text-brand-primary mb-5 leading-[0.95]" data-i18n="hero-name">
                             Saeed<br>
                             <span class="text-brand-accent">Zohoorian</span>
                         </h1>
 
                         <!-- Lead text -->
-                        <p class="text-base lg:text-lg text-slate-600 max-w-2xl mb-8 leading-relaxed mx-auto lg:mx-0">
+                        <p class="text-base lg:text-lg text-slate-600 max-w-2xl mb-8 leading-relaxed mx-auto lg:mx-0" data-i18n="hero-lead">
                             Data Science graduate from Sapienza University with professional experience building practical data systems using Python, SQL, Power BI, and machine learning. Specialized in computer vision, Bayesian modeling, data engineering, and business intelligence.
                         </p>
 
                         <!-- Stats cards -->
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mb-8 mx-auto lg:mx-0">
                             <div class="glass-card rounded-2xl p-4 border border-white shadow-sm">
-                                <p class="text-2xl font-display font-black text-brand-primary">1+</p>
-                                <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Years Professional</p>
+                                <p class="text-2xl font-display font-black text-brand-primary" data-i18n="hero-years">1+</p>
+                                <p class="text-xs font-bold uppercase tracking-widest text-slate-400" data-i18n="hero-years-label">Years Professional</p>
                             </div>
                             <div class="glass-card rounded-2xl p-4 border border-white shadow-sm">
-                                <p class="text-2xl font-display font-black text-brand-primary">3+</p>
-                                <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Live ML Demos</p>
+                                <p class="text-2xl font-display font-black text-brand-primary" data-i18n="hero-demos">3+</p>
+                                <p class="text-xs font-bold uppercase tracking-widest text-slate-400" data-i18n="hero-demos-label">Live ML Demos</p>
                             </div>
                             <div class="glass-card rounded-2xl p-4 border border-white shadow-sm">
-                                <p class="text-2xl font-display font-black text-brand-primary">MSc</p>
-                                <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Data Science</p>
+                                <p class="text-2xl font-display font-black text-brand-primary" data-i18n="hero-msc">MSc</p>
+                                <p class="text-xs font-bold uppercase tracking-widest text-slate-400" data-i18n="hero-msc-label">Data Science</p>
                             </div>
                         </div>
 
@@ -749,15 +753,15 @@
                         <div class="flex flex-wrap justify-center lg:justify-start gap-4 print:hidden">
                             <a href="#projects" class="group flex items-center gap-3 bg-brand-primary text-white px-8 py-4 rounded-2xl hover:bg-brand-accent transition-all shadow-lg hover:shadow-brand-accent/20">
                                 <i class="fas fa-diagram-project"></i>
-                                <span class="font-semibold">View Projects</span>
+                                <span class="font-semibold" data-i18n="hero-view-projects">View Projects</span>
                             </a>
                             <a href="https://github.com/saeedzns" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white border border-slate-200 px-8 py-4 rounded-2xl hover:border-brand-accent transition-all group">
                                 <i class="fab fa-github text-brand-accent group-hover:scale-110 transition-transform"></i>
-                                <span class="font-semibold">GitHub</span>
+                                <span class="font-semibold" data-i18n="hero-github">GitHub</span>
                             </a>
                             <a href="https://www.linkedin.com/in/saeed-zohoorian-631a80158/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white border border-slate-200 px-8 py-4 rounded-2xl hover:border-brand-accent transition-all group">
                                 <i class="fab fa-linkedin text-brand-accent group-hover:scale-110 transition-transform"></i>
-                                <span class="font-semibold">LinkedIn</span>
+                                <span class="font-semibold" data-i18n="hero-linkedin">LinkedIn</span>
                             </a>
                         </div>
                     </div>
@@ -773,12 +777,12 @@
         <!-- About Section -->
         <section id="about" class="mb-24">
             <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">
-                <h2 class="text-3xl font-display font-black text-brand-primary mb-6">About</h2>
+                <h2 class="text-3xl font-display font-black text-brand-primary mb-6" data-i18n="about-title">About</h2>
                 <div class="space-y-4 text-slate-600 leading-relaxed">
-                    <p>
+                    <p data-i18n="about-text-1">
                         I am a Data Scientist based in Rome with experience as a Data Analyst at Allianz Trade, where I worked with Python, SQL, Power BI, Excel, VBA, IBM Impromptu, and Microsoft Access to automate reporting workflows and support data-driven decisions.
                     </p>
-                    <p>
+                    <p data-i18n="about-text-2">
                         My technical focus is applied data science: building reproducible projects, developing dashboards and reporting pipelines, preparing structured data, and deploying interactive demos for machine learning, computer vision, Bayesian modeling, NLP, and information retrieval.
                     </p>
                 </div>
@@ -798,14 +802,14 @@
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start pt-6">
                     <div class="lg:col-span-7">
                         <div class="flex items-center gap-3 mb-5">
-                            <span class="text-xs font-black text-brand-accent uppercase tracking-[0.3em]">
+                            <span class="text-xs font-black text-brand-accent uppercase tracking-[0.3em]" data-i18n="section-projects">
                                 Selected Work
                             </span>
-                            <span class="px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-brand-accent/10 text-brand-accent border border-brand-accent/20">
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-brand-accent/10 text-brand-accent border border-brand-accent/20" data-i18n="projects-count">
                                 6 Projects
                             </span>
                         </div>
-                        <h2 class="text-4xl lg:text-5xl font-display font-black text-brand-primary tracking-tight leading-[1.05]">
+                        <h2 class="text-4xl lg:text-5xl font-display font-black text-brand-primary tracking-tight leading-[1.05]" data-i18n="projects-heading">
                             Building intelligent data systems
                             <span class="relative inline-block">
                                 <span class="relative z-10 text-brand-accent">end&#8209;to&#8209;end</span>
@@ -822,19 +826,19 @@
                             <div class="grid grid-cols-2 gap-x-5 gap-y-3">
                                 <div class="flex items-center gap-2.5">
                                     <i class="fas fa-eye text-brand-accent text-xs"></i>
-                                    <span class="text-sm font-semibold text-slate-700">Computer Vision</span>
+                                    <span class="text-sm font-semibold text-slate-700" data-i18n="focus-cv">Computer Vision</span>
                                 </div>
                                 <div class="flex items-center gap-2.5">
                                     <i class="fas fa-chart-line text-brand-accent text-xs"></i>
-                                    <span class="text-sm font-semibold text-slate-700">Bayesian Stats</span>
+                                    <span class="text-sm font-semibold text-slate-700" data-i18n="focus-bayes">Bayesian Stats</span>
                                 </div>
                                 <div class="flex items-center gap-2.5">
                                     <i class="fas fa-search text-brand-accent text-xs"></i>
-                                    <span class="text-sm font-semibold text-slate-700">Information Retrieval</span>
+                                    <span class="text-sm font-semibold text-slate-700" data-i18n="focus-ir">Information Retrieval</span>
                                 </div>
                                 <div class="flex items-center gap-2.5">
                                     <i class="fas fa-database text-brand-accent text-xs"></i>
-                                    <span class="text-sm font-semibold text-slate-700">Data Engineering</span>
+                                    <span class="text-sm font-semibold text-slate-700" data-i18n="focus-de">Data Engineering</span>
                                 </div>
                             </div>
                         </div>
@@ -853,7 +857,7 @@
                                     <i class="fas fa-video text-2xl"></i>
                                 </div>
                                 <div>
-                                    <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-accent/10 text-brand-accent">Featured Capstone</span>
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-accent/10 text-brand-accent" data-i18n="featured-capstone">Featured Capstone</span>
                                     <h3 class="text-2xl font-display font-black text-brand-primary mt-3">Ego4D-LiteSTA</h3>
                                 </div>
                             </div>
@@ -1054,7 +1058,7 @@
         <!-- Skills Section -->
         <section id="skills" class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
             <div class="lg:col-span-2 bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">
-                <h2 class="text-3xl font-display font-black text-brand-primary mb-8">Skills & Expertise</h2>
+                <h2 class="text-3xl font-display font-black text-brand-primary mb-8" data-i18n="skills-section-title">Skills & Expertise</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <h3 class="text-sm font-bold uppercase tracking-wider text-brand-accent mb-3">Data Science & ML</h3>
@@ -1122,7 +1126,7 @@
                         Professional Background
                     </span>
                 </div>
-                <h2 class="text-4xl font-display font-black text-brand-primary">Experience</h2>
+                <h2 class="text-4xl font-display font-black text-brand-primary" data-i18n="exp-section-title">Experience</h2>
             </div>
 
             <div class="space-y-6">
@@ -1171,7 +1175,7 @@
                         Education
                     </span>
                 </div>
-                <h2 class="text-4xl font-display font-black text-brand-primary">Education</h2>
+                <h2 class="text-4xl font-display font-black text-brand-primary" data-i18n="edu-section-title">Education</h2>
             </div>
 
             <article class="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300">
@@ -1194,7 +1198,7 @@
     <footer class="bg-white border-t border-slate-100 py-8 print:hidden">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                <p class="text-sm text-slate-500">© <span id="year"></span> Saeed Zohoorian. Built with HTML, Tailwind, & GitHub Pages.</p>
+                <p class="text-sm text-slate-500">© <span id="year"></span> <span data-i18n="footer-copyright">Saeed Zohoorian. Built with HTML, Tailwind, & GitHub Pages.</span></p>
                 <div class="flex items-center gap-6">
                     <a href="https://github.com/saeedzns" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-brand-accent transition-colors">
                         <i class="fab fa-github text-xl"></i>
@@ -1534,6 +1538,169 @@
                     heroStageDetail.classList.remove("is-updating");
                 }, 90);
             }
+        });
+
+        // Language switching
+        const langBtns = document.querySelectorAll('.lang-btn');
+        const savedLang = localStorage.getItem('language') || 'en';
+
+        const translations = {
+            en: {
+                'nav-contact': 'Contact',
+                'hero-data-science': 'Data Science',
+                'hero-ml': 'Machine Learning',
+                'hero-cv': 'Computer Vision',
+                'hero-name': 'Saeed<br><span class="text-brand-accent">Zohoorian</span>',
+                'hero-lead': 'Data Science graduate from Sapienza University with professional experience building practical data systems using Python, SQL, Power BI, and machine learning. Specialized in computer vision, Bayesian modeling, data engineering, and business intelligence.',
+                'hero-years': '1+',
+                'hero-years-label': 'Years Professional',
+                'hero-demos': '3+',
+                'hero-demos-label': 'Live ML Demos',
+                'hero-msc': 'MSc',
+                'hero-msc-label': 'Data Science',
+                'hero-view-projects': 'View Projects',
+                'hero-github': 'GitHub',
+                'hero-linkedin': 'LinkedIn',
+                'menu-projects': 'Projects',
+                'menu-skills': 'Skills',
+                'menu-experience': 'Experience',
+                'menu-education': 'Education',
+                'projects-ego4d': 'Ego4D-LiteSTA',
+                'projects-ego4d-excerpt': 'Egocentric interaction anticipation.',
+                'projects-bayesian': 'Bayesian Regression',
+                'projects-bayesian-excerpt': 'Ordinal regression for obesity prediction.',
+                'skills-ml': 'Data Science & ML',
+                'skills-ml-excerpt': 'Models, pipelines, and evaluation.',
+                'skills-bi': 'BI & Automation',
+                'skills-bi-excerpt': 'Power BI, dashboards, reporting.',
+                'exp-allianz': 'Allianz Trade',
+                'exp-allianz-excerpt': 'Data analyst — enterprise reporting.',
+                'exp-rasoul': 'Rasoul',
+                'exp-rasoul-excerpt': 'Retail trade data analysis.',
+                'edu-sapienza': 'Sapienza University',
+                'edu-sapienza-excerpt': 'MSc in Data Science.',
+                'edu-thesis': 'MSc Data Science',
+                'edu-thesis-excerpt': 'Thesis: Ego4D-LiteSTA.',
+                'about-title': 'About',
+                'about-text-1': 'I am a Data Scientist based in Rome with experience as a Data Analyst at Allianz Trade, where I worked with Python, SQL, Power BI, Excel, VBA, IBM Impromptu, and Microsoft Access to automate reporting workflows and support data-driven decisions.',
+                'about-text-2': 'My technical focus is applied data science: building reproducible projects, developing dashboards and reporting pipelines, preparing structured data, and deploying interactive demos for machine learning, computer vision, Bayesian modeling, NLP, and information retrieval.',
+                'section-projects': 'Selected Work',
+                'projects-count': '6 Projects',
+                'projects-heading': 'Building intelligent data systems<span class="relative inline-block"><span class="relative z-10 text-brand-accent">end‐to‐end</span><span class="absolute bottom-1 left-0 w-full h-3 bg-brand-accent/15 -z-0 rounded-sm"></span></span>',
+                'focus-cv': 'Computer Vision',
+                'focus-bayes': 'Bayesian Stats',
+                'focus-ir': 'Information Retrieval',
+                'focus-de': 'Data Engineering',
+                'featured-capstone': 'Featured Capstone',
+                'skills-section-title': 'Skills & Expertise',
+                'exp-section-title': 'Experience',
+                'edu-section-title': 'Education',
+                'portfolio-focus': 'Portfolio Focus',
+                'portfolio-motto': 'Applied AI for real-world systems',
+                'portfolio-focus-1': 'Computer vision and egocentric interaction understanding',
+                'portfolio-focus-2': 'Bayesian modeling and statistical analysis',
+                'portfolio-focus-3': 'Data engineering, SQL, and reproducible pipelines',
+                'portfolio-focus-4': 'BI dashboards, reporting automation, and Power BI',
+                'portfolio-note': 'Data Science graduate from Sapienza University with practical experience in analytics, machine learning, and reporting automation.',
+                'footer-copyright': 'Saeed Zohoorian. Built with HTML, Tailwind, & GitHub Pages.'
+            },
+            it: {
+                'nav-contact': 'Contatti',
+                'hero-data-science': 'Scienza dei Dati',
+                'hero-ml': 'Machine Learning',
+                'hero-cv': 'Visione Artificiale',
+                'hero-name': 'Saeed<br><span class="text-brand-accent">Zohoorian</span>',
+                'hero-lead': 'Laureato in Data Science presso l\'Università Sapienza con esperienza professionale nella costruzione di sistemi dati pratici utilizzando Python, SQL, Power BI e machine learning. Specializzato in visione artificiale, modellazione bayesiana, ingegneria dei dati e business intelligence.',
+                'hero-years': '1+',
+                'hero-years-label': 'Anni di Esperienza',
+                'hero-demos': '3+',
+                'hero-demos-label': 'Demo ML Live',
+                'hero-msc': 'MSc',
+                'hero-msc-label': 'Data Science',
+                'hero-view-projects': 'Visualizza Progetti',
+                'hero-github': 'GitHub',
+                'hero-linkedin': 'LinkedIn',
+                'menu-projects': 'Progetti',
+                'menu-skills': 'Competenze',
+                'menu-experience': 'Esperienza',
+                'menu-education': 'Formazione',
+                'projects-ego4d': 'Ego4D-LiteSTA',
+                'projects-ego4d-excerpt': 'Anticipazione di interazioni egocentriche.',
+                'projects-bayesian': 'Regressione Bayesiana',
+                'projects-bayesian-excerpt': 'Regressione ordinale per previsione obesità.',
+                'skills-ml': 'Data Science & ML',
+                'skills-ml-excerpt': 'Modelli, pipeline e valutazione.',
+                'skills-bi': 'BI & Automazione',
+                'skills-bi-excerpt': 'Power BI, dashboard, report.',
+                'exp-allianz': 'Allianz Trade',
+                'exp-allianz-excerpt': 'Analista dati — reporting aziendale.',
+                'exp-rasoul': 'Rasoul',
+                'exp-rasoul-excerpt': 'Analisi dati commerciali retail.',
+                'edu-sapienza': 'Università Sapienza',
+                'edu-sapienza-excerpt': 'MSc in Data Science.',
+                'edu-thesis': 'MSc Data Science',
+                'edu-thesis-excerpt': 'Tesi: Ego4D-LiteSTA.',
+                'about-title': 'Chi Sono',
+                'about-text-1': 'Sono un Data Scientist con sede a Roma con esperienza come Analista Dati presso Allianz Trade, dove ho lavorato con Python, SQL, Power BI, Excel, VBA, IBM Impromptu e Microsoft Access per automatizzare i flussi di reporting e supportare decisioni data-driven.',
+                'about-text-2': 'La mia specializzazione tecnica è nella data science applicata: costruire progetti riproducibili, sviluppare dashboard e pipeline di reporting, preparare dati strutturati e distribuire demo interattive per machine learning, visione artificiale, modellazione bayesiana, NLP e information retrieval.',
+                'section-projects': 'Lavori Selezionati',
+                'projects-count': '6 Progetti',
+                'projects-heading': 'Costruire sistemi dati intelligenti<span class="relative inline-block"><span class="relative z-10 text-brand-accent">end‐to‐end</span><span class="absolute bottom-1 left-0 w-full h-3 bg-brand-accent/15 -z-0 rounded-sm"></span></span>',
+                'focus-cv': 'Visione Artificiale',
+                'focus-bayes': 'Statistica Bayesiana',
+                'focus-ir': 'Information Retrieval',
+                'focus-de': 'Ingegneria Dati',
+                'featured-capstone': 'Capstone Principale',
+                'skills-section-title': 'Competenze ed Esperienza',
+                'exp-section-title': 'Esperienza',
+                'edu-section-title': 'Formazione',
+                'portfolio-focus': 'Portfolio Focus',
+                'portfolio-motto': 'AI Applicata per Sistemi Reali',
+                'portfolio-focus-1': 'Visione artificiale e comprensione di interazioni egocentriche',
+                'portfolio-focus-2': 'Modellazione bayesiana e analisi statistica',
+                'portfolio-focus-3': 'Ingegneria dati, SQL e pipeline riproducibili',
+                'portfolio-focus-4': 'Dashboard BI, automazione reporting e Power BI',
+                'portfolio-note': 'Laureato in Data Science presso l\'Università Sapienza con esperienza pratica in analytics, machine learning e automazione di reporting.',
+                'footer-copyright': 'Saeed Zohoorian. Costruito con HTML, Tailwind e GitHub Pages.'
+            }
+        };
+
+        const setLanguage = (lang) => {
+            const trans = translations[lang];
+            if (!trans) return;
+            
+            // Update button active state
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-accent', 'text-white');
+                btn.classList.add('bg-slate-200', 'text-slate-700');
+            });
+            document.querySelector(`[data-lang="${lang}"]`).classList.add('bg-brand-accent', 'text-white');
+            document.querySelector(`[data-lang="${lang}"]`).classList.remove('bg-slate-200', 'text-slate-700');
+            
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (trans[key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'BUTTON') {
+                        el.placeholder = trans[key];
+                    } else {
+                        el.innerHTML = trans[key];
+                    }
+                }
+            });
+            
+            localStorage.setItem('language', lang);
+        };
+
+        // Initialize language
+        setLanguage(savedLang);
+        
+        // Language button listeners
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
+                setLanguage(lang);
+            });
         });
 
         document.getElementById("year").textContent = new Date().getFullYear();
