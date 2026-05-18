@@ -31,6 +31,24 @@
     </script>
 
     <style>
+        body {
+            transition: background-color 0.25s ease, color 0.25s ease;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            background:
+                radial-gradient(circle at top right, rgba(37, 99, 235, 0.16), transparent 34%),
+                radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 30%),
+                linear-gradient(180deg, rgba(2, 6, 23, 0.12), rgba(2, 6, 23, 0));
+            z-index: -1;
+        }
+
         .scroll-smooth {
             scroll-behavior: smooth;
         }
@@ -53,6 +71,424 @@
         .glass-card {
             background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(18px);
+        }
+
+        .hero-links {
+            display: grid;
+            gap: 0.9rem;
+            align-self: start;
+        }
+
+        .hero-link {
+            position: relative;
+            display: block;
+            padding: 1rem 1.1rem;
+            border-radius: 1.4rem;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 14px 36px rgba(15, 23, 42, 0.08);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .hero-link-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            color: inherit;
+        }
+
+        .hero-link:hover {
+            transform: translateX(4px);
+            border-color: rgba(37, 99, 235, 0.25);
+            box-shadow: 0 18px 42px rgba(15, 23, 42, 0.12);
+        }
+
+        .hero-link-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-link-title span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .hero-link-sub {
+            display: grid;
+            gap: 0.45rem;
+            margin-top: 0.85rem;
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-4px);
+            transition: max-height 0.25s ease, opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .hero-link:hover .hero-link-sub,
+        .hero-link:focus-within .hero-link-sub {
+            max-height: 7rem;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-link-sub a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: fit-content;
+            padding: 0.35rem 0.65rem;
+            border-radius: 9999px;
+            background: rgba(37, 99, 235, 0.08);
+            color: #1d4ed8;
+            font-size: 0.82rem;
+            font-weight: 700;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .hero-link-sub a:hover {
+            background: rgba(37, 99, 235, 0.14);
+        }
+
+        .hero-preview {
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .hero-preview.is-updating {
+            opacity: 0.35;
+            transform: translateY(6px);
+        }
+
+        .hero-preview-card {
+            position: relative;
+            width: min(100%, 360px);
+            margin-left: auto;
+        }
+
+        .hero-stage {
+            position: relative;
+            min-height: 420px;
+        }
+
+        .hero-stage-layer {
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .hero-stage-default {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-stage-detail {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateX(24px);
+            pointer-events: none;
+        }
+
+        .hero-stage.active .hero-stage-default {
+            opacity: 0.08;
+            transform: translateX(3rem);
+        }
+
+        .hero-stage.active .hero-stage-detail {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        .hero-detail-panel {
+            width: 100%;
+            max-width: 760px;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 60;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.8rem 1rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            background: rgba(255, 255, 255, 0.92);
+            color: #0f172a;
+            box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
+            backdrop-filter: blur(18px);
+            font-weight: 700;
+            font-size: 0.9rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-1px);
+        }
+
+        .theme-toggle i {
+            font-size: 0.9rem;
+        }
+
+        .portfolio-focus {
+            position: fixed;
+            top: 5.75rem;
+            right: 1rem;
+            width: min(340px, calc(100vw - 2rem));
+            z-index: 55;
+            border-radius: 2rem;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(12, 18, 34, 0.94));
+            box-shadow: 0 22px 60px rgba(15, 23, 42, 0.22);
+            backdrop-filter: blur(18px);
+            overflow: hidden;
+        }
+
+        .portfolio-focus::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 10%, rgba(33, 89, 214, 0.18), transparent 22%),
+                radial-gradient(circle at 90% 0%, rgba(79, 127, 232, 0.16), transparent 28%);
+            pointer-events: none;
+        }
+
+        .portfolio-focus-inner {
+            position: relative;
+            padding: 1.3rem 1.35rem 1.4rem;
+            color: #f8fafc;
+        }
+
+        .portfolio-focus-badge {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.35rem;
+            background: linear-gradient(180deg, rgba(33, 89, 214, 0.22), rgba(79, 127, 232, 0.1));
+            border: 1px solid rgba(33, 89, 214, 0.14);
+        }
+
+        .portfolio-focus-badge i {
+            color: #74a7ff;
+            font-size: 2rem;
+        }
+
+        .portfolio-focus-label {
+            color: #74a7ff;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.34em;
+            text-transform: uppercase;
+            margin-bottom: 0.9rem;
+        }
+
+        .portfolio-focus-title {
+            font-size: 2rem;
+            line-height: 1.02;
+            font-weight: 800;
+            color: #f8fafc;
+            letter-spacing: -0.03em;
+            margin: 0 0 1.1rem;
+            max-width: 12ch;
+        }
+
+        .portfolio-focus-list {
+            display: grid;
+            gap: 0.85rem;
+            margin-top: 0.75rem;
+        }
+
+        .portfolio-focus-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            color: #cbd5e1;
+            font-size: 0.92rem;
+            line-height: 1.45;
+        }
+
+        .portfolio-focus-item i {
+            margin-top: 0.2rem;
+            color: #74a7ff;
+            flex: 0 0 auto;
+        }
+
+        .portfolio-focus-note {
+            margin-top: 1.15rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.14);
+            color: #94a3b8;
+            font-size: 0.82rem;
+        }
+
+        body[data-theme="dark"] {
+            background: #07111f;
+            color: #e5efff;
+        }
+
+        body[data-theme="dark"]::before {
+            opacity: 1;
+        }
+
+        body[data-theme="dark"] nav,
+        body[data-theme="dark"] footer {
+            background: rgba(7, 17, 31, 0.88) !important;
+            border-color: rgba(148, 163, 184, 0.12) !important;
+        }
+
+        body[data-theme="dark"] .theme-toggle {
+            background: rgba(15, 23, 42, 0.9);
+            color: #f8fafc;
+            border-color: rgba(148, 163, 184, 0.24);
+        }
+
+        body[data-theme="dark"] .portfolio-focus {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(8, 15, 30, 0.96));
+            border-color: rgba(148, 163, 184, 0.14);
+            box-shadow: 0 24px 58px rgba(0, 0, 0, 0.34);
+        }
+
+        body[data-theme="dark"] .portfolio-focus-label {
+            color: #9ad0ff;
+        }
+
+        body[data-theme="dark"] .portfolio-focus-title {
+            color: #f8fafc;
+        }
+
+        body[data-theme="dark"] .portfolio-focus-item {
+            color: #dbe7ff;
+        }
+
+        body[data-theme="dark"] .portfolio-focus-item i {
+            color: #9ad0ff;
+        }
+
+        body[data-theme="dark"] .portfolio-focus-note {
+            color: #94a3b8;
+        }
+
+        body[data-theme="dark"] .bg-white,
+        body[data-theme="dark"] .glass-card {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(17, 24, 39, 0.92)) !important;
+            color: #e5efff;
+        }
+
+        body[data-theme="dark"] .bg-slate-50,
+        body[data-theme="dark"] .bg-slate-100 {
+            background: rgba(30, 41, 59, 0.88) !important;
+        }
+
+        body[data-theme="dark"] .border-slate-100,
+        body[data-theme="dark"] .border-slate-200,
+        body[data-theme="dark"] .border-white {
+            border-color: rgba(148, 163, 184, 0.16) !important;
+        }
+
+        body[data-theme="dark"] .text-brand-primary,
+        body[data-theme="dark"] .text-slate-700,
+        body[data-theme="dark"] .text-slate-600 {
+            color: #e5efff !important;
+        }
+
+        body[data-theme="dark"] .text-slate-500,
+        body[data-theme="dark"] .text-slate-400 {
+            color: #9ab0d7 !important;
+        }
+
+        body[data-theme="dark"] .bg-brand-surface {
+            background: #07111f !important;
+        }
+
+        body[data-theme="dark"] .shadow-sm,
+        body[data-theme="dark"] .shadow-md,
+        body[data-theme="dark"] .shadow-lg,
+        body[data-theme="dark"] .shadow-xl,
+        body[data-theme="dark"] .shadow-2xl {
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28) !important;
+        }
+
+        body[data-theme="dark"] .bg-blue-50,
+        body[data-theme="dark"] .bg-blue-50\/60 {
+            background: rgba(15, 23, 42, 0.92) !important;
+        }
+
+        body[data-theme="dark"] .bg-brand-primary {
+            background: #0f172a !important;
+        }
+
+        body[data-theme="dark"] .text-brand-accent {
+            color: #7fb0ff !important;
+        }
+
+        body[data-theme="dark"] .bg-brand-accent\/10,
+        body[data-theme="dark"] .bg-brand-accent\/5 {
+            background-color: rgba(127, 176, 255, 0.12) !important;
+        }
+
+        body[data-theme="dark"] .hero-link {
+            background: rgba(15, 23, 42, 0.88);
+            border-color: rgba(148, 163, 184, 0.16);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+        }
+
+        body[data-theme="dark"] .hero-link-main {
+            color: inherit;
+        }
+
+        body[data-theme="dark"] .hero-link-title {
+            color: #e5efff;
+        }
+
+        body[data-theme="dark"] .hero-link-sub a {
+            background: rgba(127, 176, 255, 0.14);
+            color: #cfe0ff;
+        }
+
+        body[data-theme="dark"] .hero-link:hover {
+            border-color: rgba(127, 176, 255, 0.28);
+        }
+
+        body[data-theme="dark"] .hero-link-sub a:hover {
+            background: rgba(127, 176, 255, 0.2);
+        }
+
+        body[data-theme="dark"] .hero-preview-card .bg-white {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(17, 24, 39, 0.95)) !important;
+        }
+
+        body[data-theme="dark"] .hero-stage.active .hero-stage-default {
+            opacity: 0.05;
+        }
+
+        body[data-theme="dark"] .hero-detail-panel .bg-white {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(17, 24, 39, 0.95)) !important;
+        }
+
+        body[data-theme="dark"] .border-brand-accent\/20 {
+            border-color: rgba(127, 176, 255, 0.24) !important;
+        }
+
+        body[data-theme="dark"] a {
+            color: inherit;
         }
 
         .project-card:hover .project-icon {
@@ -85,17 +521,34 @@
     </style>
 </head>
 <body class="bg-brand-surface font-sans selection:bg-brand-accent/20 selection:text-brand-accent scroll-smooth text-slate-700">
+    <button class="theme-toggle print:hidden" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+        <i class="fas fa-moon"></i>
+        <span>Dark mode</span>
+    </button>
+
+    <aside class="portfolio-focus print:hidden hidden xl:block" aria-label="Portfolio Focus">
+        <div class="portfolio-focus-inner">
+            <div class="portfolio-focus-badge">
+                <i class="fas fa-brain"></i>
+            </div>
+            <div class="portfolio-focus-label">Portfolio Focus</div>
+            <h2 class="portfolio-focus-title">Applied AI for real-world systems</h2>
+            <div class="portfolio-focus-list">
+                <div class="portfolio-focus-item"><i class="fas fa-check"></i><span>Computer vision and egocentric interaction understanding</span></div>
+                <div class="portfolio-focus-item"><i class="fas fa-check"></i><span>Bayesian modeling and statistical analysis</span></div>
+                <div class="portfolio-focus-item"><i class="fas fa-check"></i><span>Data engineering, SQL, and reproducible pipelines</span></div>
+                <div class="portfolio-focus-item"><i class="fas fa-check"></i><span>BI dashboards, reporting automation, and Power BI</span></div>
+            </div>
+            <div class="portfolio-focus-note">
+                Data Science graduate from Sapienza University with practical experience in analytics, machine learning, and reporting automation.
+            </div>
+        </div>
+    </aside>
 
     <!-- Navigation -->
     <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-100 print:hidden">
         <div class="container mx-auto px-6 py-4 flex items-center justify-between">
             <a href="#home" class="font-display font-black text-xl text-brand-primary">Saeed<span class="text-brand-accent">.</span></a>
-            <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-500">
-                <a href="#projects" class="hover:text-brand-accent transition-colors">Projects</a>
-                <a href="#skills" class="hover:text-brand-accent transition-colors">Skills</a>
-                <a href="#experience" class="hover:text-brand-accent transition-colors">Experience</a>
-                <a href="#education" class="hover:text-brand-accent transition-colors">Education</a>
-            </div>
             <a href="mailto:zns1992@gmail.com" class="hidden sm:inline-flex items-center gap-2 bg-brand-primary text-white px-5 py-3 rounded-2xl hover:bg-brand-accent transition-all">
                 <i class="fas fa-envelope text-sm"></i> Contact
             </a>
@@ -108,101 +561,123 @@
         <div class="absolute -top-28 -left-28 w-72 h-72 bg-brand-accent/10 rounded-full blur-3xl"></div>
 
         <div class="container mx-auto px-6 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center gap-12">
-                <div class="flex-1 text-center lg:text-left fade-in">
-                    <!-- Role badges -->
-                    <div class="inline-flex flex-wrap items-center justify-center lg:justify-start gap-2 mb-5 rounded-full bg-white/80 border border-slate-200 shadow-sm px-3 py-2 backdrop-blur">
-                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-[0.18em] bg-brand-accent/10 text-brand-accent">
-                            <span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span> Data Science
-                        </span>
-                        <span class="hidden sm:block w-px h-5 bg-slate-200"></span>
-                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-[0.18em] text-slate-700">
-                            <i class="fas fa-brain text-brand-accent text-xs"></i> Machine Learning
-                        </span>
-                        <span class="hidden sm:block w-px h-5 bg-slate-200"></span>
-                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-[0.18em] text-slate-500">
-                            <i class="fas fa-eye text-brand-accent text-xs"></i> Computer Vision
-                        </span>
-                    </div>
-
-                    <!-- Main heading -->
-                    <h1 class="text-4xl lg:text-6xl font-display font-black text-brand-primary mb-5 leading-[0.95]">
-                        Saeed<br>
-                        <span class="text-brand-accent">Zohoorian</span>
-                    </h1>
-
-                    <!-- Lead text -->
-                    <p class="text-base lg:text-lg text-slate-600 max-w-2xl mb-8 leading-relaxed">
-                        Data Science graduate from Sapienza University with professional experience building practical data systems using Python, SQL, Power BI, and machine learning. Specialized in computer vision, Bayesian modeling, data engineering, and business intelligence.
-                    </p>
-
-                    <!-- Stats cards -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mb-8">
-                        <div class="glass-card rounded-2xl p-4 border border-white shadow-sm">
-                            <p class="text-2xl font-display font-black text-brand-primary">1+</p>
-                            <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Years Professional</p>
-                        </div>
-                        <div class="glass-card rounded-2xl p-4 border border-white shadow-sm">
-                            <p class="text-2xl font-display font-black text-brand-primary">3+</p>
-                            <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Live ML Demos</p>
-                        </div>
-                        <div class="glass-card rounded-2xl p-4 border border-white shadow-sm">
-                            <p class="text-2xl font-display font-black text-brand-primary">MSc</p>
-                            <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Data Science</p>
+            <div class="flex flex-col lg:flex-row items-start gap-8 lg:gap-12">
+                <aside class="hero-links w-full lg:w-[240px] lg:pt-6">
+                    <div class="hero-link" data-preview="projects">
+                        <a class="hero-link-main" href="#projects">
+                            <div class="hero-link-title">
+                                <span><i class="fas fa-diagram-project text-brand-accent"></i> Projects</span>
+                                <i class="fas fa-chevron-right text-xs text-slate-400"></i>
+                            </div>
+                        </a>
+                        <div class="hero-link-sub">
+                            <a href="#projects" data-preview="projects-litesta">Ego4D-LiteSTA</a>
+                            <a href="#projects" data-preview="projects-bayesian">Bayesian Regression</a>
                         </div>
                     </div>
 
-                    <!-- CTA Buttons -->
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 print:hidden">
-                        <a href="#projects" class="group flex items-center gap-3 bg-brand-primary text-white px-8 py-4 rounded-2xl hover:bg-brand-accent transition-all shadow-lg hover:shadow-brand-accent/20">
-                            <i class="fas fa-diagram-project"></i>
-                            <span class="font-semibold">View Projects</span>
+                    <div class="hero-link" data-preview="skills">
+                        <a class="hero-link-main" href="#skills">
+                            <div class="hero-link-title">
+                                <span><i class="fas fa-layer-group text-brand-accent"></i> Skills</span>
+                                <i class="fas fa-chevron-right text-xs text-slate-400"></i>
+                            </div>
                         </a>
-                        <a href="https://github.com/saeedzns" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white border border-slate-200 px-8 py-4 rounded-2xl hover:border-brand-accent transition-all group">
-                            <i class="fab fa-github text-brand-accent group-hover:scale-110 transition-transform"></i>
-                            <span class="font-semibold">GitHub</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/saeed-zohoorian-631a80158/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white border border-slate-200 px-8 py-4 rounded-2xl hover:border-brand-accent transition-all group">
-                            <i class="fab fa-linkedin text-brand-accent group-hover:scale-110 transition-transform"></i>
-                            <span class="font-semibold">LinkedIn</span>
-                        </a>
+                        <div class="hero-link-sub">
+                            <a href="#skills" data-preview="skills-ml">Data Science & ML</a>
+                            <a href="#skills" data-preview="skills-bi">BI & Automation</a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Profile card -->
-                <div class="relative fade-in" style="animation-delay: 0.2s;">
-                    <div class="relative w-56 h-[300px] lg:w-[300px] lg:h-[420px]">
-                        <div class="absolute -inset-4 bg-brand-accent/10 rounded-[2rem] -rotate-3 blur-2xl"></div>
-                        <div class="absolute inset-0 bg-brand-accent/5 rounded-[2rem] rotate-3"></div>
-                        <div class="relative w-full h-full overflow-hidden rounded-[2rem] shadow-[0_16px_32px_-8px_rgba(0,0,0,0.1)] border-8 border-white bg-slate-900">
-                            <div class="absolute inset-0 bg-gradient-to-br from-brand-primary via-slate-900 to-brand-accent/30"></div>
-                            <div class="relative h-full p-8 flex flex-col justify-between text-white">
-                                <div>
-                                    <div class="w-16 h-16 rounded-2xl bg-brand-accent/20 flex items-center justify-center mb-6">
-                                        <i class="fas fa-code text-brand-accent text-3xl"></i>
-                                    </div>
-                                    <p class="text-xs font-black uppercase tracking-[0.25em] text-brand-accent mb-3">Focus Areas</p>
-                                    <h2 class="text-3xl font-display font-black leading-tight">Applied ML for real-world data systems</h2>
-                                </div>
-                                <div class="space-y-3 text-sm text-slate-300">
-                                    <p><i class="fas fa-check text-brand-accent mr-2"></i>Computer Vision & Egocentric AI</p>
-                                    <p><i class="fas fa-check text-brand-accent mr-2"></i>Bayesian & Statistical Modeling</p>
-                                    <p><i class="fas fa-check text-brand-accent mr-2"></i>Data Engineering & Dashboards</p>
-                                </div>
+                    <div class="hero-link" data-preview="experience">
+                        <a class="hero-link-main" href="#experience">
+                            <div class="hero-link-title">
+                                <span><i class="fas fa-briefcase text-brand-accent"></i> Experience</span>
+                                <i class="fas fa-chevron-right text-xs text-slate-400"></i>
+                            </div>
+                        </a>
+                        <div class="hero-link-sub">
+                            <a href="#experience" data-preview="experience-allianz">Allianz Trade</a>
+                            <a href="#experience" data-preview="experience-rasoul">Rasoul</a>
+                        </div>
+                    </div>
+
+                    <div class="hero-link" data-preview="education">
+                        <a class="hero-link-main" href="#education">
+                            <div class="hero-link-title">
+                                <span><i class="fas fa-graduation-cap text-brand-accent"></i> Education</span>
+                                <i class="fas fa-chevron-right text-xs text-slate-400"></i>
+                            </div>
+                        </a>
+                        <div class="hero-link-sub">
+                            <a href="#education" data-preview="education-sapienza">Sapienza University</a>
+                            <a href="#education" data-preview="education-thesis">MSc Data Science</a>
+                        </div>
+                    </div>
+                </aside>
+
+                <div class="hero-stage flex-1 w-full fade-in">
+                    <div id="hero-stage-default" class="hero-stage-layer hero-stage-default text-center lg:text-left">
+                        <!-- Role badges -->
+                        <div class="inline-flex flex-wrap items-center justify-center lg:justify-start gap-2 mb-5 rounded-full bg-white/80 border border-slate-200 shadow-sm px-3 py-2 backdrop-blur">
+                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-[0.18em] bg-brand-accent/10 text-brand-accent">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span> Data Science
+                            </span>
+                            <span class="hidden sm:block w-px h-5 bg-slate-200"></span>
+                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-[0.18em] text-slate-700">
+                                <i class="fas fa-brain text-brand-accent text-xs"></i> Machine Learning
+                            </span>
+                            <span class="hidden sm:block w-px h-5 bg-slate-200"></span>
+                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-[0.18em] text-slate-500">
+                                <i class="fas fa-eye text-brand-accent text-xs"></i> Computer Vision
+                            </span>
+                        </div>
+
+                        <!-- Main heading -->
+                        <h1 class="text-4xl lg:text-6xl font-display font-black text-brand-primary mb-5 leading-[0.95]">
+                            Saeed<br>
+                            <span class="text-brand-accent">Zohoorian</span>
+                        </h1>
+
+                        <!-- Lead text -->
+                        <p class="text-base lg:text-lg text-slate-600 max-w-2xl mb-8 leading-relaxed mx-auto lg:mx-0">
+                            Data Science graduate from Sapienza University with professional experience building practical data systems using Python, SQL, Power BI, and machine learning. Specialized in computer vision, Bayesian modeling, data engineering, and business intelligence.
+                        </p>
+
+                        <!-- Stats cards -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mb-8 mx-auto lg:mx-0">
+                            <div class="glass-card rounded-2xl p-4 border border-white shadow-sm">
+                                <p class="text-2xl font-display font-black text-brand-primary">1+</p>
+                                <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Years Professional</p>
+                            </div>
+                            <div class="glass-card rounded-2xl p-4 border border-white shadow-sm">
+                                <p class="text-2xl font-display font-black text-brand-primary">3+</p>
+                                <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Live ML Demos</p>
+                            </div>
+                            <div class="glass-card rounded-2xl p-4 border border-white shadow-sm">
+                                <p class="text-2xl font-display font-black text-brand-primary">MSc</p>
+                                <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Data Science</p>
                             </div>
                         </div>
-                        <div class="absolute -bottom-8 -right-8 bg-white p-6 rounded-3xl shadow-2xl border border-slate-100 hidden md:block">
-                            <div class="flex items-center gap-4">
-                                <div class="p-3 bg-blue-50 rounded-2xl">
-                                    <i class="fas fa-database text-blue-600 text-xl"></i>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mb-1">Core Stack</p>
-                                    <p class="text-xl font-display font-bold text-brand-primary">Python · PyTorch</p>
-                                </div>
-                            </div>
+
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-4 print:hidden">
+                            <a href="#projects" class="group flex items-center gap-3 bg-brand-primary text-white px-8 py-4 rounded-2xl hover:bg-brand-accent transition-all shadow-lg hover:shadow-brand-accent/20">
+                                <i class="fas fa-diagram-project"></i>
+                                <span class="font-semibold">View Projects</span>
+                            </a>
+                            <a href="https://github.com/saeedzns" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white border border-slate-200 px-8 py-4 rounded-2xl hover:border-brand-accent transition-all group">
+                                <i class="fab fa-github text-brand-accent group-hover:scale-110 transition-transform"></i>
+                                <span class="font-semibold">GitHub</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/saeed-zohoorian-631a80158/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white border border-slate-200 px-8 py-4 rounded-2xl hover:border-brand-accent transition-all group">
+                                <i class="fab fa-linkedin text-brand-accent group-hover:scale-110 transition-transform"></i>
+                                <span class="font-semibold">LinkedIn</span>
+                            </a>
                         </div>
                     </div>
+
+                    <div id="hero-stage-detail" class="hero-stage-layer hero-stage-detail"></div>
                 </div>
             </div>
         </div>
@@ -651,6 +1126,281 @@
     </footer>
 
     <script>
+        const themeToggle = document.querySelector(".theme-toggle");
+        const heroStage = document.querySelector(".hero-stage");
+        const heroStageDetail = document.getElementById("hero-stage-detail");
+        const heroButtons = document.querySelectorAll(".hero-link");
+        const heroMainButtons = document.querySelectorAll(".hero-link-main");
+        const savedTheme = localStorage.getItem("theme");
+
+        const previewContent = {
+            projects: `
+                <div class="hero-detail-panel">
+                    <div class="relative overflow-hidden rounded-[2rem] bg-white border border-slate-100 shadow-[0_18px_48px_rgba(15,23,42,0.12)] p-8 lg:p-10">
+                        <div class="absolute top-0 right-0 w-72 h-72 bg-brand-accent/5 rounded-full blur-3xl translate-x-24 -translate-y-24"></div>
+                        <div class="relative grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                            <div class="lg:col-span-2 text-left">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-14 h-14 rounded-2xl bg-brand-accent text-white flex items-center justify-center">
+                                        <i class="fas fa-video text-2xl"></i>
+                                    </div>
+                                    <div>
+                                        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-accent/10 text-brand-accent">Featured Project</span>
+                                        <h2 class="text-3xl font-display font-black text-brand-primary mt-3">Ego4D-LiteSTA</h2>
+                                    </div>
+                                </div>
+                                <p class="text-slate-600 leading-relaxed mb-6">
+                                    Lightweight three-track computer vision pipeline for egocentric interaction anticipation. Predicts interaction object, action, and time-to-contact while reducing latency for real-time egocentric video understanding.
+                                </p>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100">
+                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-1">Focus</p>
+                                        <p class="font-bold text-brand-primary">Egocentric Vision</p>
+                                    </div>
+                                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100">
+                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-1">Task</p>
+                                        <p class="font-bold text-brand-primary">Interaction Prediction</p>
+                                    </div>
+                                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100">
+                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-1">Impact</p>
+                                        <p class="font-bold text-brand-primary">Reduced Latency</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg">Python</span>
+                                    <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg">PyTorch</span>
+                                    <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg">Computer Vision</span>
+                                    <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg">Object Detection</span>
+                                    <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg">Egocentric AI</span>
+                                    <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg">Gradio</span>
+                                </div>
+                            </div>
+                            <div class="bg-brand-primary rounded-3xl p-6 text-white shadow-xl">
+                                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-brand-accent mb-4">Project Links</p>
+                                <div class="space-y-3">
+                                    <a href="https://github.com/saeedzns/Ego4d-LiteSTA" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-white/10 hover:bg-brand-accent rounded-2xl p-4 transition-all group">
+                                        <span class="font-bold"><i class="fab fa-github mr-2"></i>GitHub Code</span>
+                                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                                    </a>
+                                    <a href="https://huggingface.co/spaces/saeedzns/ego4d-litesta-demo" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-white/10 hover:bg-brand-accent rounded-2xl p-4 transition-all group">
+                                        <span class="font-bold"><i class="fas fa-play-circle mr-2"></i>Live Demo</span>
+                                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+            "projects-litesta": `
+                <div class="hero-detail-panel">
+                    <div class="relative overflow-hidden rounded-[2rem] bg-white border border-slate-100 shadow-[0_18px_48px_rgba(15,23,42,0.12)] p-8 lg:p-10">
+                        <div class="relative grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                            <div class="lg:col-span-2 text-left">
+                                <p class="text-xs font-black uppercase tracking-[0.25em] text-brand-accent mb-3">Project Detail</p>
+                                <h2 class="text-3xl font-display font-black text-brand-primary mb-4">Ego4D-LiteSTA</h2>
+                                <p class="text-slate-600 leading-relaxed mb-6">Lightweight three-track computer vision pipeline for egocentric interaction anticipation. Predicts interaction object, action, and time-to-contact while reducing latency for real-time egocentric video understanding.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg">Python</span>
+                                    <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg">PyTorch</span>
+                                    <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg">Computer Vision</span>
+                                    <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg">Egocentric AI</span>
+                                </div>
+                            </div>
+                            <div class="bg-brand-primary rounded-3xl p-6 text-white shadow-xl">
+                                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-brand-accent mb-4">Project Links</p>
+                                <div class="space-y-3">
+                                    <a href="https://github.com/saeedzns/Ego4d-LiteSTA" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-white/10 hover:bg-brand-accent rounded-2xl p-4 transition-all group">
+                                        <span class="font-bold"><i class="fab fa-github mr-2"></i>GitHub Code</span>
+                                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                                    </a>
+                                    <a href="https://huggingface.co/spaces/saeedzns/ego4d-litesta-demo" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-white/10 hover:bg-brand-accent rounded-2xl p-4 transition-all group">
+                                        <span class="font-bold"><i class="fas fa-play-circle mr-2"></i>Live Demo</span>
+                                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+            "projects-bayesian": `
+                <div class="hero-detail-panel">
+                    <div class="relative overflow-hidden rounded-[2rem] bg-white border border-slate-100 shadow-[0_18px_48px_rgba(15,23,42,0.12)] p-8 lg:p-10">
+                        <div class="relative grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                            <div class="lg:col-span-2 text-left">
+                                <p class="text-xs font-black uppercase tracking-[0.25em] text-brand-accent mb-3">Project Detail</p>
+                                <h2 class="text-3xl font-display font-black text-brand-primary mb-4">Bayesian Ordinal Regression</h2>
+                                <p class="text-slate-600 leading-relaxed mb-6">Statistical modeling comparing proportional odds and partial proportional odds approaches for obesity category prediction with focus on calibration, interpretability, and model fit.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg">Bayesian Inference</span>
+                                    <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg">Ordinal Regression</span>
+                                    <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg">Statistical Modeling</span>
+                                    <span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-lg">Streamlit</span>
+                                </div>
+                            </div>
+                            <div class="bg-brand-primary rounded-3xl p-6 text-white shadow-xl">
+                                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-brand-accent mb-4">Project Links</p>
+                                <div class="space-y-3">
+                                    <a href="https://github.com/saeedzns/Bayesian-Ordinal-Regression-for-Obesity-Level-Prediction" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-white/10 hover:bg-brand-accent rounded-2xl p-4 transition-all group">
+                                        <span class="font-bold"><i class="fab fa-github mr-2"></i>GitHub Code</span>
+                                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                                    </a>
+                                    <a href="https://bayesian-ordinal-regression-for-obesity-level-prediction-vqsdg.streamlit.app/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-white/10 hover:bg-brand-accent rounded-2xl p-4 transition-all group">
+                                        <span class="font-bold"><i class="fas fa-play-circle mr-2"></i>Live Demo</span>
+                                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+            skills: `
+                <div class="hero-detail-panel">
+                    <div class="relative overflow-hidden rounded-[2rem] bg-white border border-slate-100 shadow-[0_18px_48px_rgba(15,23,42,0.12)] p-8 lg:p-10 text-left">
+                        <p class="text-xs font-black uppercase tracking-[0.25em] text-brand-accent mb-3">Skills</p>
+                        <h2 class="text-3xl font-display font-black text-brand-primary mb-4">Technical toolkit</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-600">
+                            <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100">Python, Scikit-learn, PyTorch, TensorFlow, JAX, Pandas, NumPy, NLP, CV</div>
+                            <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100">SQL, PostgreSQL, PySpark, Neo4j, data preprocessing, pipelines</div>
+                            <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100">Power BI, Excel, VBA, reporting automation, dashboards</div>
+                            <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100">AWS, GitHub, Streamlit, Gradio, Hugging Face, Colab</div>
+                        </div>
+                    </div>
+                </div>`,
+            "skills-ml": `
+                <div class="hero-detail-panel">
+                    <div class="relative overflow-hidden rounded-[2rem] bg-white border border-slate-100 shadow-[0_18px_48px_rgba(15,23,42,0.12)] p-8 lg:p-10 text-left">
+                        <p class="text-xs font-black uppercase tracking-[0.25em] text-brand-accent mb-3">Skills Detail</p>
+                        <h2 class="text-3xl font-display font-black text-brand-primary mb-4">Data Science & ML</h2>
+                        <p class="text-slate-600 leading-relaxed">Python, Scikit-learn, PyTorch, TensorFlow, JAX, NumPy, Pandas, model evaluation, classification, regression, NLP, computer vision.</p>
+                    </div>
+                </div>`,
+            "skills-bi": `
+                <div class="hero-detail-panel">
+                    <div class="relative overflow-hidden rounded-[2rem] bg-white border border-slate-100 shadow-[0_18px_48px_rgba(15,23,42,0.12)] p-8 lg:p-10 text-left">
+                        <p class="text-xs font-black uppercase tracking-[0.25em] text-brand-accent mb-3">Skills Detail</p>
+                        <h2 class="text-3xl font-display font-black text-brand-primary mb-4">BI & Automation</h2>
+                        <p class="text-slate-600 leading-relaxed">Power BI, IBM Cognos Impromptu, Excel, VBA, Microsoft Access, automated reporting, dashboards, workflow optimization.</p>
+                    </div>
+                </div>`,
+            experience: `
+                <div class="hero-detail-panel">
+                    <div class="relative overflow-hidden rounded-[2rem] bg-white border border-slate-100 shadow-[0_18px_48px_rgba(15,23,42,0.12)] p-8 lg:p-10 text-left">
+                        <p class="text-xs font-black uppercase tracking-[0.25em] text-brand-accent mb-3">Experience</p>
+                        <h2 class="text-3xl font-display font-black text-brand-primary mb-6">Professional background</h2>
+                        <div class="space-y-4">
+                            <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100">
+                                <h3 class="font-bold text-brand-primary">Data Analyst · Allianz Trade</h3>
+                                <p class="text-sm text-slate-500">Rome, Italy · May 2023 – Apr 2024</p>
+                            </div>
+                            <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100">
+                                <h3 class="font-bold text-brand-primary">Data Analyst · Rasoul</h3>
+                                <p class="text-sm text-slate-500">Tehran, Iran · Apr 2015 – Apr 2018</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+            "experience-allianz": `
+                <div class="hero-detail-panel">
+                    <div class="relative overflow-hidden rounded-[2rem] bg-white border border-slate-100 shadow-[0_18px_48px_rgba(15,23,42,0.12)] p-8 lg:p-10 text-left">
+                        <p class="text-xs font-black uppercase tracking-[0.25em] text-brand-accent mb-3">Experience Detail</p>
+                        <h2 class="text-3xl font-display font-black text-brand-primary mb-4">Data Analyst · Allianz Trade</h2>
+                        <p class="text-slate-600 leading-relaxed">Rome, Italy · May 2023 – Apr 2024. Analyzed business data using Python, SQL, Power BI, Excel, VBA, IBM Impromptu, and Microsoft Access.</p>
+                    </div>
+                </div>`,
+            "experience-rasoul": `
+                <div class="hero-detail-panel">
+                    <div class="relative overflow-hidden rounded-[2rem] bg-white border border-slate-100 shadow-[0_18px_48px_rgba(15,23,42,0.12)] p-8 lg:p-10 text-left">
+                        <p class="text-xs font-black uppercase tracking-[0.25em] text-brand-accent mb-3">Experience Detail</p>
+                        <h2 class="text-3xl font-display font-black text-brand-primary mb-4">Data Analyst · Rasoul</h2>
+                        <p class="text-slate-600 leading-relaxed">Tehran, Iran · Apr 2015 – Apr 2018. Collected and analyzed trade and customer data from multiple electronics stores.</p>
+                    </div>
+                </div>`,
+            education: `
+                <div class="hero-detail-panel">
+                    <div class="relative overflow-hidden rounded-[2rem] bg-white border border-slate-100 shadow-[0_18px_48px_rgba(15,23,42,0.12)] p-8 lg:p-10 text-left">
+                        <p class="text-xs font-black uppercase tracking-[0.25em] text-brand-accent mb-3">Education</p>
+                        <h2 class="text-3xl font-display font-black text-brand-primary mb-4">Sapienza University</h2>
+                        <p class="text-slate-600 mb-4">MSc in Data Science, with thesis work on Ego4D-LiteSTA and coursework in machine learning, computer vision, statistical modeling, algorithms, and information retrieval.</p>
+                        <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100">
+                            <p class="font-bold text-brand-primary">Thesis</p>
+                            <p class="text-sm text-slate-500">Ego4D-LiteSTA - Egocentric Interaction Anticipation</p>
+                        </div>
+                    </div>
+                </div>`,
+            "education-sapienza": `
+                <div class="hero-detail-panel">
+                    <div class="relative overflow-hidden rounded-[2rem] bg-white border border-slate-100 shadow-[0_18px_48px_rgba(15,23,42,0.12)] p-8 lg:p-10 text-left">
+                        <p class="text-xs font-black uppercase tracking-[0.25em] text-brand-accent mb-3">Education Detail</p>
+                        <h2 class="text-3xl font-display font-black text-brand-primary mb-4">Sapienza University of Rome</h2>
+                        <p class="text-slate-600 leading-relaxed">MSc in Data Science with coursework in machine learning, computer vision, statistical modeling, algorithms, data engineering, and information retrieval.</p>
+                    </div>
+                </div>`,
+            "education-thesis": `
+                <div class="hero-detail-panel">
+                    <div class="relative overflow-hidden rounded-[2rem] bg-white border border-slate-100 shadow-[0_18px_48px_rgba(15,23,42,0.12)] p-8 lg:p-10 text-left">
+                        <p class="text-xs font-black uppercase tracking-[0.25em] text-brand-accent mb-3">Education Detail</p>
+                        <h2 class="text-3xl font-display font-black text-brand-primary mb-4">Thesis</h2>
+                        <p class="text-slate-600 leading-relaxed">Ego4D-LiteSTA - Egocentric Interaction Anticipation, focused on lightweight video understanding and interaction prediction.</p>
+                    </div>
+                </div>`
+        };
+
+        const setTheme = (theme) => {
+            const isDark = theme === "dark";
+            document.body.setAttribute("data-theme", theme);
+            themeToggle.setAttribute("aria-pressed", String(isDark));
+            themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+            themeToggle.innerHTML = isDark
+                ? '<i class="fas fa-sun"></i><span>Light mode</span>'
+                : '<i class="fas fa-moon"></i><span>Dark mode</span>';
+            localStorage.setItem("theme", theme);
+        };
+
+        const initialTheme = savedTheme || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        setTheme(initialTheme);
+
+        themeToggle.addEventListener("click", () => {
+            const nextTheme = document.body.getAttribute("data-theme") === "dark" ? "light" : "dark";
+            setTheme(nextTheme);
+        });
+
+        const setPreview = (key) => {
+            if (!heroStage || !heroStageDetail || !previewContent[key]) {
+                return;
+            }
+            heroStage.classList.add("active");
+            heroStageDetail.classList.add("is-updating");
+            window.setTimeout(() => {
+                heroStageDetail.innerHTML = previewContent[key];
+                heroStageDetail.classList.remove("is-updating");
+            }, 90);
+        };
+
+        heroMainButtons.forEach((button) => {
+            const previewTarget = button.closest(".hero-link")?.dataset.preview || "";
+            button.addEventListener("mouseenter", () => setPreview(previewTarget));
+            button.addEventListener("focusin", () => setPreview(previewTarget));
+        });
+
+        heroButtons.forEach((button) => {
+            button.querySelectorAll(".hero-link-sub a").forEach((link) => {
+                const submenuPreview = link.dataset.preview || button.dataset.preview || "";
+                link.addEventListener("mouseenter", () => setPreview(submenuPreview));
+                link.addEventListener("focusin", () => setPreview(submenuPreview));
+            });
+        });
+
+        document.querySelector("#home").addEventListener("mouseleave", () => {
+            if (heroStage && heroStageDetail) {
+                heroStage.classList.remove("active");
+                heroStageDetail.classList.add("is-updating");
+                window.setTimeout(() => {
+                    heroStageDetail.innerHTML = "";
+                    heroStageDetail.classList.remove("is-updating");
+                }, 90);
+            }
+        });
+
         document.getElementById("year").textContent = new Date().getFullYear();
     </script>
 </body>
