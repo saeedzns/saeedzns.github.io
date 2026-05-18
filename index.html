@@ -79,6 +79,28 @@
             align-self: start;
         }
 
+        /* Mobile: hide left rail by default and show as overlay when toggled */
+        @media (max-width: 1023px) {
+            .hero-links {
+                display: none;
+            }
+            body.mobile-menu-open .hero-links {
+                display: grid;
+                position: absolute;
+                top: 72px;
+                left: 12px;
+                right: 12px;
+                z-index: 60;
+                padding: 0.6rem;
+                background: rgba(255,255,255,0.95);
+                border-radius: 1rem;
+                box-shadow: 0 18px 40px rgba(2,6,23,0.12);
+            }
+            body.mobile-menu-open .hero-links .hero-link {
+                margin-bottom: 0.5rem;
+            }
+        }
+
         .hero-link {
             position: relative;
             display: block;
@@ -151,6 +173,48 @@
             font-size: 0.82rem;
             font-weight: 700;
             transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .hero-link-sub a .short-excerpt { display: none; }
+
+        /* Mobile accordion behavior: hide submenus unless parent has .open */
+        @media (max-width: 1023px) {
+            .hero-link-sub {
+                max-height: 0 !important;
+                opacity: 0 !important;
+                transform: translateY(-6px) !important;
+                overflow: hidden;
+                margin-top: 0.5rem;
+            }
+            .hero-link.open .hero-link-sub {
+                max-height: 8rem !important;
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+            .hero-link-main {
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.2rem;
+            }
+            .hero-link-title {
+                font-size: 1rem;
+            }
+            .hero-link-sub a {
+                display: block;
+                background: rgba(15, 23, 42, 0.03);
+                color: #0f172a;
+                padding: 0.5rem 0.6rem;
+                border-radius: 0.5rem;
+                font-weight: 600;
+            }
+            .hero-link-sub a .short-excerpt {
+                display: block;
+                font-size: 0.78rem;
+                color: #6b7280;
+                margin-top: 0.25rem;
+            }
         }
 
         .hero-link-sub a:hover {
@@ -521,12 +585,17 @@
     </style>
 </head>
 <body class="bg-brand-surface font-sans selection:bg-brand-accent/20 selection:text-brand-accent scroll-smooth text-slate-700">
-    <button class="theme-toggle print:hidden" type="button" aria-pressed="false" aria-label="Switch to dark mode">
-        <i class="fas fa-moon"></i>
-        <span>Dark mode</span>
-    </button>
+    <div class="flex items-center gap-3">
+        <button class="theme-toggle print:hidden" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+            <i class="fas fa-moon"></i>
+            <span>Dark mode</span>
+        </button>
+        <button class="mobile-menu-toggle lg:hidden print:hidden p-2 rounded-md bg-white/80 border border-slate-200 shadow-sm" aria-label="Open menu">
+            <i class="fas fa-bars text-sm"></i>
+        </button>
+    </div>
 
-    <aside class="portfolio-focus print:hidden hidden xl:block" aria-label="Portfolio Focus">
+    <aside class="portfolio-focus print:hidden hidden lg:block" aria-label="Portfolio Focus">
         <div class="portfolio-focus-inner">
             <div class="portfolio-focus-badge">
                 <i class="fas fa-brain"></i>
@@ -571,8 +640,12 @@
                             </div>
                         </a>
                         <div class="hero-link-sub">
-                            <a href="#projects" data-preview="projects-litesta">Ego4D-LiteSTA</a>
-                            <a href="#projects" data-preview="projects-bayesian">Bayesian Regression</a>
+                            <a href="#projects" data-preview="projects-litesta">Ego4D-LiteSTA
+                                <span class="short-excerpt">Egocentric interaction anticipation.</span>
+                            </a>
+                            <a href="#projects" data-preview="projects-bayesian">Bayesian Regression
+                                <span class="short-excerpt">Ordinal regression for obesity prediction.</span>
+                            </a>
                         </div>
                     </div>
 
@@ -584,8 +657,12 @@
                             </div>
                         </a>
                         <div class="hero-link-sub">
-                            <a href="#skills" data-preview="skills-ml">Data Science & ML</a>
-                            <a href="#skills" data-preview="skills-bi">BI & Automation</a>
+                            <a href="#skills" data-preview="skills-ml">Data Science & ML
+                                <span class="short-excerpt">Models, pipelines, and evaluation.</span>
+                            </a>
+                            <a href="#skills" data-preview="skills-bi">BI & Automation
+                                <span class="short-excerpt">Power BI, dashboards, reporting.</span>
+                            </a>
                         </div>
                     </div>
 
@@ -597,8 +674,12 @@
                             </div>
                         </a>
                         <div class="hero-link-sub">
-                            <a href="#experience" data-preview="experience-allianz">Allianz Trade</a>
-                            <a href="#experience" data-preview="experience-rasoul">Rasoul</a>
+                            <a href="#experience" data-preview="experience-allianz">Allianz Trade
+                                <span class="short-excerpt">Data analyst — enterprise reporting.</span>
+                            </a>
+                            <a href="#experience" data-preview="experience-rasoul">Rasoul
+                                <span class="short-excerpt">Retail trade data analysis.</span>
+                            </a>
                         </div>
                     </div>
 
@@ -610,8 +691,12 @@
                             </div>
                         </a>
                         <div class="hero-link-sub">
-                            <a href="#education" data-preview="education-sapienza">Sapienza University</a>
-                            <a href="#education" data-preview="education-thesis">MSc Data Science</a>
+                            <a href="#education" data-preview="education-sapienza">Sapienza University
+                                <span class="short-excerpt">MSc in Data Science.</span>
+                            </a>
+                            <a href="#education" data-preview="education-thesis">MSc Data Science
+                                <span class="short-excerpt">Thesis: Ego4D-LiteSTA.</span>
+                            </a>
                         </div>
                     </div>
                 </aside>
@@ -1131,6 +1216,7 @@
         const heroStageDetail = document.getElementById("hero-stage-detail");
         const heroButtons = document.querySelectorAll(".hero-link");
         const heroMainButtons = document.querySelectorAll(".hero-link-main");
+        const mobileToggle = document.querySelector(".mobile-menu-toggle");
         const savedTheme = localStorage.getItem("theme");
 
         const previewContent = {
@@ -1364,6 +1450,14 @@
             setTheme(nextTheme);
         });
 
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', () => {
+                const isOpen = document.body.classList.toggle('mobile-menu-open');
+                mobileToggle.setAttribute('aria-pressed', String(isOpen));
+                mobileToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+            });
+        }
+
         const setPreview = (key) => {
             if (!heroStage || !heroStageDetail || !previewContent[key]) {
                 return;
@@ -1378,15 +1472,56 @@
 
         heroMainButtons.forEach((button) => {
             const previewTarget = button.closest(".hero-link")?.dataset.preview || "";
-            button.addEventListener("mouseenter", () => setPreview(previewTarget));
-            button.addEventListener("focusin", () => setPreview(previewTarget));
+            button.addEventListener("mouseenter", () => {
+                if (window.innerWidth >= 1024) setPreview(previewTarget);
+            });
+            button.addEventListener("focusin", () => {
+                if (window.innerWidth >= 1024) setPreview(previewTarget);
+            });
+            // On small screens, tapping the main area toggles its submenu
+            button.addEventListener('click', (e) => {
+                if (window.innerWidth < 1024) {
+                    e.preventDefault();
+                    const parent = button.closest('.hero-link');
+                    const isOpen = parent.classList.toggle('open');
+                    parent.setAttribute('aria-expanded', String(isOpen));
+                    // close other open items
+                    document.querySelectorAll('.hero-link.open').forEach(el => {
+                        if (el !== parent) {
+                            el.classList.remove('open');
+                            el.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                }
+            });
         });
 
         heroButtons.forEach((button) => {
             button.querySelectorAll(".hero-link-sub a").forEach((link) => {
                 const submenuPreview = link.dataset.preview || button.dataset.preview || "";
-                link.addEventListener("mouseenter", () => setPreview(submenuPreview));
-                link.addEventListener("focusin", () => setPreview(submenuPreview));
+                link.addEventListener("mouseenter", () => {
+                    if (window.innerWidth >= 1024) setPreview(submenuPreview);
+                });
+                link.addEventListener("focusin", () => {
+                    if (window.innerWidth >= 1024) setPreview(submenuPreview);
+                });
+            });
+        });
+
+        // Submenu click: on mobile navigate to section and close the menu; on desktop use preview behavior
+        document.querySelectorAll('.hero-link-sub a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (window.innerWidth < 1024) {
+                    // allow default anchor navigation; just close overlays
+                    document.body.classList.remove('mobile-menu-open');
+                    document.querySelectorAll('.hero-link.open').forEach(el => el.classList.remove('open'));
+                    // let browser handle anchor scrolling
+                    return;
+                }
+                // Desktop: prevent default navigation and show preview instead
+                e.preventDefault();
+                const key = link.dataset.preview || '';
+                if (key) setPreview(key);
             });
         });
 
